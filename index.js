@@ -49,14 +49,33 @@ app.post('/soldierdetails', (req, res) => {
 );
 
 
+app.post('/postingdetails', (req, res) => {
+  console.log(req.body.car)
+  let query = `SELECT * FROM posting`;
+  console.log(query);
+    db.query(query, (err, results) => {
+      
+      if (err) {
+        res.status(500).send('Internal Server Error');
+        return;
+      }
+      
+      console.log(results)
+      res.json(results);
+      
+    });
+  }
+);
+
+
 
 app.post('/insertsoldier', (req, res) => {
-  const { soldier_id, name, dob, gender, address, Salary } = req.body;
+  const { soldier_id, name, dob, gender, address, salary } = req.body;
 
   // Use parameterized query to prevent SQL injection
   let query = `INSERT INTO soldier(soldier_id, name, dob, gender, address, Salary) VALUES (? , ? , ? , ? , ? ,?)`;
 
-  db.query(query, [soldier_id, name, dob, gender, address, Salary ], (err, results) => {
+  db.query(query, [soldier_id, name, dob, gender, address, salary ], (err, results) => {
 
     if (err) {
       console.error('Error inserting data:', err);
@@ -70,6 +89,26 @@ app.post('/insertsoldier', (req, res) => {
 });
 
 
+app.post('/viewsoldiers', (req, res) => {
+
+  const soldier_id = req.body.soldier_id;
+
+  let query = `SELECT  *  FROM soldier WHERE soldier_id = ?`;
+
+  db.query(query,[soldier_id],(err, results) => {
+
+    if (err) {
+      console.error('Error inserting data:', err);
+      res.status(500).send('Internal Server Error');
+      return;
+    }
+
+    console.log(results);
+    res.json(results);
+  });
+});
+
+
 
 app.post('/deletesoldier', (req, res) => {
 
@@ -78,6 +117,25 @@ app.post('/deletesoldier', (req, res) => {
   let query = `DELETE FROM soldier WHERE soldier_id = ?`;
 
   db.query(query,[soldier_id],(err, results) => {
+
+    if (err) {
+      console.error('Error inserting data:', err);
+      res.status(500).send('Internal Server Error');
+      return;
+    }
+
+    console.log(results);
+  });
+});
+
+
+app.post('/deleteposting', (req, res) => {
+
+  const post_id = req.body.post_id;
+
+  let query = `DELETE FROM posting WHERE post_id = ?`;
+
+  db.query(query,[post_id],(err, results) => {
 
     if (err) {
       console.error('Error inserting data:', err);
