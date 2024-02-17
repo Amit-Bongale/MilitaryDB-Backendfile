@@ -94,7 +94,6 @@ app.post('/viewsoldiers', (req, res) => {
   const soldier_id = req.body.soldier_id;
 
   let query = `SELECT  *  FROM soldier WHERE soldier_id = ?`;
-
   db.query(query,[soldier_id],(err, results) => {
 
     if (err) {
@@ -104,7 +103,39 @@ app.post('/viewsoldiers', (req, res) => {
     }
 
     console.log(results);
+    console.log(query);
+
     res.json(results);
+  });
+});
+
+
+
+app.post('/updatesoldier', (req, res) => {
+  const { soldier_id , name, dob, gender, address, salary } = req.body;
+  // Use parameterized query to prevent SQL injection
+  let query =
+  `UPDATE soldier SET 
+  name = '${name}',
+  dob = '${dob}',
+  gender = '${gender}',
+  address = '${address}',
+  salary = '${salary}'
+  WHERE soldier_id = '${soldier_id}'`;
+
+  db.query(query,  (err, results) => {
+
+    if (err) {
+      console.error('Error inserting data:', err);
+      res.status(500).send('Internal Server Error');
+      return;
+    }
+
+    console.log(results);
+    console.log(query);
+    console.log('Soldier updated successfully');
+    res.status(200).send('Soldier updated successfully');
+    
   });
 });
 
@@ -115,7 +146,7 @@ app.post('/deletesoldier', (req, res) => {
   const soldier_id = req.body.soldier_id;
 
   let query = `DELETE FROM soldier WHERE soldier_id = ?`;
-
+  console.log(query);
   db.query(query,[soldier_id],(err, results) => {
 
     if (err) {
@@ -125,6 +156,7 @@ app.post('/deletesoldier', (req, res) => {
     }
 
     console.log(results);
+   
   });
 });
 
@@ -144,6 +176,7 @@ app.post('/deleteposting', (req, res) => {
     }
 
     console.log(results);
+    console.log(query);
   });
 });
 
