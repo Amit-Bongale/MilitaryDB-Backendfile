@@ -72,7 +72,6 @@ app.post('/postingdetails', (req, res) => {
 app.post('/insertsoldier', (req, res) => {
   const { soldier_id, name, dob, gender, address, salary } = req.body;
 
-  // Use parameterized query to prevent SQL injection
   let query = `INSERT INTO soldier(soldier_id, name, dob, gender, address, Salary) VALUES (? , ? , ? , ? , ? ,?)`;
 
   db.query(query, [soldier_id, name, dob, gender, address, salary ], (err, results) => {
@@ -113,7 +112,7 @@ app.post('/viewsoldiers', (req, res) => {
 
 app.post('/updatesoldier', (req, res) => {
   const { soldier_id , name, dob, gender, address, salary } = req.body;
-  // Use parameterized query to prevent SQL injection
+
   let query =
   `UPDATE soldier SET 
   name = '${name}',
