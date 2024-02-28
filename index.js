@@ -189,7 +189,352 @@ app.post('/searchsoldier', (req, res) => {
 
 
 
-// POSTINGS Queries
+// Department Query
+
+app.post('/departmentdetails', (req, res) => {
+  console.log(req.body.car)
+  let query = `SELECT * FROM department`;
+  console.log(query);
+    db.query(query, (err, results) => {
+      
+      if (err) {
+        res.status(500).send('Internal Server Error');
+        return;
+      }
+      
+      console.log(results)
+      res.json(results);
+      
+    });
+  }
+);
+
+
+
+
+
+app.post('/insertdepartment', (req, res) => {
+  const { department_id, department_name, department_location, soldier_id } = req.body;
+
+  let query = `INSERT INTO department(department_id, department_name, department_location, soldier_id) VALUES (? , ? , ? ,?)`;
+
+  db.query(query, [department_id, department_name, department_location, soldier_id ], (err, results) => {
+
+    if (err) {
+      console.error('Error inserting data:', err);
+      res.status(500).send('Internal Server Error');
+      return;
+    }
+
+    console.log(results);
+    
+  });
+});
+
+
+app.post('/viewdepartments', (req, res) => {
+
+  const department_id = req.body.department_id;
+
+  let query = `SELECT  *  FROM department WHERE department_id = ?`;
+  db.query(query,[department_id],(err, results) => {
+
+    if (err) {
+      console.error('Error inserting data:', err);
+      res.status(500).send('Internal Server Error');
+      return;
+    }
+
+    console.log(results);
+    console.log(query);
+
+    res.json(results);
+  });
+});
+
+
+
+app.post('/updatedepartment', (req, res) => {
+  const { department_id, department_name, department_location, soldier_id } = req.body;
+
+  let query =
+  `UPDATE department SET 
+  department_id = '${department_id}',
+  department_name = '${department_name}',
+  department_location = '${department_location}',
+  WHERE department_id = '${department_id}'`;
+
+  db.query(query,  (err, results) => {
+
+    if (err) {
+      console.error('Error inserting data:', err);
+      res.status(500).send('Internal Server Error');
+      return;
+    }
+
+    console.log(results);
+    console.log(query);
+    console.log('Department updated successfully');
+    res.status(200).send('Department updated successfully');
+    
+  });
+});
+
+
+
+app.post('/deletedepartment', (req, res) => {
+
+  const department_id = req.body.department_id;
+
+  let query = `DELETE FROM department WHERE department_id = ?`;
+  console.log(query);
+  db.query(query,[department_id],(err, results) => {
+
+    if (err) {
+      console.error('Error inserting data:', err);
+      res.status(500).send('Internal Server Error');
+      return;
+    }
+
+    console.log(results);
+   
+  });
+});
+
+
+
+
+// Medals Query
+
+app.post('/medaldetails', (req, res) => {
+  console.log(req.body.car)
+  let query = `SELECT * FROM medal`;
+  console.log(query);
+    db.query(query, (err, results) => {
+      
+      if (err) {
+        res.status(500).send('Internal Server Error');
+        return;
+      }
+      
+      console.log(results)
+      res.json(results);
+      
+    });
+  }
+);
+
+
+
+
+app.post('/insertmedal', (req, res) => {
+  const { medal_id, medal_name, soldier_id } = req.body;
+
+  let query = `INSERT INTO soldier(medal_id, medal_name, soldier_id) VALUES (? , ? , ?)`;
+
+  db.query(query, [medal_id, medal_name, soldier_id ], (err, results) => {
+
+    if (err) {
+      console.error('Error inserting data:', err);
+      res.status(500).send('Internal Server Error');
+      return;
+    }
+
+    console.log(results);
+    
+  });
+});
+
+
+app.post('/viewmedals', (req, res) => {
+
+  const medal_id = req.body.medal_id;
+
+  let query = `SELECT  *  FROM medal WHERE medal_id = ?`;
+  db.query(query,[medal_id],(err, results) => {
+
+    if (err) {
+      console.error('Error inserting data:', err);
+      res.status(500).send('Internal Server Error');
+      return;
+    }
+
+    console.log(results);
+    console.log(query);
+
+    res.json(results);
+  });
+});
+
+
+
+app.post('/updatemedal', (req, res) => {
+  const { medal_id, medal_name, soldier_id } = req.body;
+
+  let query =
+  `UPDATE medal SET 
+  medal_id = '${medal_id}',
+  medal_name = '${medal_name}',
+  solider_id = '${solider_id}',
+  WHERE medal_id = '${medal_id}'`;
+
+  db.query(query,  (err, results) => {
+
+    if (err) {
+      console.error('Error inserting data:', err);
+      res.status(500).send('Internal Server Error');
+      return;
+    }
+
+    console.log(results);
+    console.log(query);
+    console.log('Medal updated successfully');
+    res.status(200).send('Medal updated successfully');
+    
+  });
+});
+
+
+
+app.post('/deletemedal', (req, res) => {
+
+  const medal_id = req.body.medal_id;
+
+  let query = `DELETE FROM medal WHERE medal_id = ?`;
+  console.log(query);
+  db.query(query,[medal_id],(err, results) => {
+
+    if (err) {
+      console.error('Error inserting data:', err);
+      res.status(500).send('Internal Server Error');
+      return;
+    }
+
+    console.log(results);
+   
+  });
+});
+
+
+
+
+app.post('/operationdetails', (req, res) => {
+  console.log(req.body.car)
+  let query = `SELECT * FROM operation`;
+  console.log(query);
+    db.query(query, (err, results) => {
+      
+      if (err) {
+        res.status(500).send('Internal Server Error');
+        return;
+      }
+      
+      console.log(results)
+      res.json(results);
+      
+    });
+  }
+);
+
+
+
+
+// Operation Query
+
+app.post('/insertoperation', (req, res) => {
+  const { operation_id, operation_name, outcome, start_date, end_date, solider_id } = req.body;
+
+  let query = `INSERT INTO operation(operation_id, operation_name, outcome, start_date, end_date, solider_id) VALUES (? , ? , ? , ? , ? , ? ,?)`;
+
+  db.query(query, [operation_id, operation_name, outcome, start_date, end_date, solider_id ], (err, results) => {
+
+    if (err) {
+      console.error('Error inserting data:', err);
+      res.status(500).send('Internal Server Error');
+      return;
+    }
+
+    console.log(results);
+    
+  });
+});
+
+
+app.post('/viewoperations', (req, res) => {
+
+  const operation_id = req.body.operation_id;
+
+  let query = `SELECT  *  FROM operation WHERE operation_id = ?`;
+  db.query(query,[operation_id],(err, results) => {
+
+    if (err) {
+      console.error('Error inserting data:', err);
+      res.status(500).send('Internal Server Error');
+      return;
+    }
+
+    console.log(results);
+    console.log(query);
+
+    res.json(results);
+  });
+});
+
+
+
+app.post('/updateoperation', (req, res) => {
+  const { operation_id, operation_name, outcome, start_date, end_date, solider_id } = req.body;
+
+  let query =
+  `UPDATE soldier SET 
+  operation_id = '${operation_id}',
+  operation_name = '${operation_name}',
+  outcome = '${outcome}',
+  start_date = '${start_date}',
+  end_date = '${end_date}'
+  soldier_id = '${soldier_id}',
+  WHERE operation_id = '${operation_id}'`;
+
+  db.query(query,  (err, results) => {
+
+    if (err) {
+      console.error('Error inserting data:', err);
+      res.status(500).send('Internal Server Error');
+      return;
+    }
+
+    console.log(results);
+    console.log(query);
+    console.log('Operation updated successfully');
+    res.status(200).send('Operation updated successfully');
+    
+  });
+});
+
+
+
+app.post('/deleteoperation', (req, res) => {
+
+  const operation_id = req.body.operation_id;
+
+  let query = `DELETE FROM operation WHERE operation_id = ?`;
+  console.log(query);
+  db.query(query,[operation_id],(err, results) => {
+
+    if (err) {
+      console.error('Error inserting data:', err);
+      res.status(500).send('Internal Server Error');
+      return;
+    }
+
+    console.log(results);
+   
+  });
+});
+
+
+
+// Posting Query
 
 app.post('/postingdetails', (req, res) => {
   console.log(req.body.car)
@@ -208,6 +553,100 @@ app.post('/postingdetails', (req, res) => {
     });
   }
 );
+
+
+
+
+app.post('/insertposting', (req, res) => {
+  const { post_id, start_date, end_date, location, address, salary } = req.body;
+
+  let query = `INSERT INTO posting(post_id, start_date, end_date, location, address, salary) VALUES (? , ? , ? , ? , ? ,?)`;
+
+  db.query(query, [post_id, start_date, end_date, location, address, salary ], (err, results) => {
+
+    if (err) {
+      console.error('Error inserting data:', err);
+      res.status(500).send('Internal Server Error');
+      return;
+    }
+
+    console.log(results);
+    
+  });
+});
+
+
+app.post('/viewpostings', (req, res) => {
+
+  const post_id = req.body.post_id;
+
+  let query = `SELECT  *  FROM posting WHERE posting_id = ?`;
+  db.query(query,[post_id],(err, results) => {
+
+    if (err) {
+      console.error('Error inserting data:', err);
+      res.status(500).send('Internal Server Error');
+      return;
+    }
+
+    console.log(results);
+    console.log(query);
+
+    res.json(results);
+  });
+});
+
+
+
+app.post('/updateposting', (req, res) => {
+  const { post_id, start_date, end_date, location, address, salary } = req.body;
+
+  let query =
+  `UPDATE posting SET 
+  post_id = '${post_id}',
+  start_date = '${start_date}',
+  end_date = '${end_date}',
+  location = '${location}',
+  address = '${address}',
+  salary = '${salary}'
+  WHERE post_id = '${post_id}'`;
+
+  db.query(query,  (err, results) => {
+
+    if (err) {
+      console.error('Error inserting data:', err);
+      res.status(500).send('Internal Server Error');
+      return;
+    }
+
+    console.log(results);
+    console.log(query);
+    console.log('Posting updated successfully');
+    res.status(200).send('Posting updated successfully');
+    
+  });
+});
+
+
+
+app.post('/deleteposting', (req, res) => {
+
+  const post_id = req.body.post_id;
+
+  let query = `DELETE FROM posting WHERE posting_id = ?`;
+  console.log(query);
+  db.query(query,[post_id],(err, results) => {
+
+    if (err) {
+      console.error('Error inserting data:', err);
+      res.status(500).send('Internal Server Error');
+      return;
+    }
+
+    console.log(results);
+   
+  });
+});
 
 // Start the server
 app.listen(port, () => {
