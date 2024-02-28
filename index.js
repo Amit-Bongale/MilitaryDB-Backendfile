@@ -51,8 +51,6 @@ app.post('/soldierdetails', (req, res) => {
 );
 
 
-
-
 app.post('/insertsoldier', (req, res) => {
   const { soldier_id, name, dob, gender, address, salary } = req.body;
 
@@ -144,25 +142,6 @@ app.post('/deletesoldier', (req, res) => {
 });
 
 
-app.post('/deleteposting', (req, res) => {
-
-  const post_id = req.body.post_id;
-
-  let query = `DELETE FROM posting WHERE post_id = ?`;
-
-  db.query(query,[post_id],(err, results) => {
-
-    if (err) {
-      console.error('Error inserting data:', err);
-      res.status(500).send('Internal Server Error');
-      return;
-    }
-
-    console.log(results);
-    console.log(query);
-  });
-});
-
 
 app.post('/searchsoldier', (req, res) => {
 
@@ -192,7 +171,7 @@ app.post('/searchsoldier', (req, res) => {
 // Department Query
 
 app.post('/departmentdetails', (req, res) => {
-  console.log(req.body.car)
+
   let query = `SELECT * FROM department`;
   console.log(query);
     db.query(query, (err, results) => {
@@ -210,13 +189,12 @@ app.post('/departmentdetails', (req, res) => {
 );
 
 
-
-
-
 app.post('/insertdepartment', (req, res) => {
   const { department_id, department_name, department_location, soldier_id } = req.body;
 
   let query = `INSERT INTO department(department_id, department_name, department_location, soldier_id) VALUES (? , ? , ? ,?)`;
+
+  console.log(query);
 
   db.query(query, [department_id, department_name, department_location, soldier_id ], (err, results) => {
 
@@ -225,7 +203,7 @@ app.post('/insertdepartment', (req, res) => {
       res.status(500).send('Internal Server Error');
       return;
     }
-
+    
     console.log(results);
     
   });
@@ -259,9 +237,9 @@ app.post('/updatedepartment', (req, res) => {
 
   let query =
   `UPDATE department SET 
-  department_id = '${department_id}',
   department_name = '${department_name}',
   department_location = '${department_location}',
+  soldier_id = '${soldier_id}
   WHERE department_id = '${department_id}'`;
 
   db.query(query,  (err, results) => {
@@ -308,7 +286,7 @@ app.post('/deletedepartment', (req, res) => {
 
 app.post('/medaldetails', (req, res) => {
   console.log(req.body.car)
-  let query = `SELECT * FROM medal`;
+  let query = `SELECT * FROM medals`;
   console.log(query);
     db.query(query, (err, results) => {
       
@@ -330,7 +308,7 @@ app.post('/medaldetails', (req, res) => {
 app.post('/insertmedal', (req, res) => {
   const { medal_id, medal_name, soldier_id } = req.body;
 
-  let query = `INSERT INTO soldier(medal_id, medal_name, soldier_id) VALUES (? , ? , ?)`;
+  let query = `INSERT INTO  MEDALS(medal_id, medal_name, soldier_id) VALUES (? , ? , ?)`;
 
   db.query(query, [medal_id, medal_name, soldier_id ], (err, results) => {
 
@@ -350,7 +328,7 @@ app.post('/viewmedals', (req, res) => {
 
   const medal_id = req.body.medal_id;
 
-  let query = `SELECT  *  FROM medal WHERE medal_id = ?`;
+  let query = `SELECT  *  FROM medals WHERE medal_id = ?`;
   db.query(query,[medal_id],(err, results) => {
 
     if (err) {
@@ -372,10 +350,9 @@ app.post('/updatemedal', (req, res) => {
   const { medal_id, medal_name, soldier_id } = req.body;
 
   let query =
-  `UPDATE medal SET 
-  medal_id = '${medal_id}',
+  `UPDATE medals SET 
   medal_name = '${medal_name}',
-  solider_id = '${solider_id}',
+  solider_id = '${soldier_id}',
   WHERE medal_id = '${medal_id}'`;
 
   db.query(query,  (err, results) => {
@@ -400,7 +377,7 @@ app.post('/deletemedal', (req, res) => {
 
   const medal_id = req.body.medal_id;
 
-  let query = `DELETE FROM medal WHERE medal_id = ?`;
+  let query = `DELETE FROM medals WHERE medal_id = ?`;
   console.log(query);
   db.query(query,[medal_id],(err, results) => {
 
@@ -417,6 +394,7 @@ app.post('/deletemedal', (req, res) => {
 
 
 
+// Operation Query
 
 app.post('/operationdetails', (req, res) => {
   console.log(req.body.car)
@@ -437,9 +415,6 @@ app.post('/operationdetails', (req, res) => {
 );
 
 
-
-
-// Operation Query
 
 app.post('/insertoperation', (req, res) => {
   const { operation_id, operation_name, outcome, start_date, end_date, solider_id } = req.body;
@@ -636,7 +611,7 @@ app.post('/deleteposting', (req, res) => {
   let query = `DELETE FROM posting WHERE posting_id = ?`;
   console.log(query);
   db.query(query,[post_id],(err, results) => {
-
+    
     if (err) {
       console.error('Error inserting data:', err);
       res.status(500).send('Internal Server Error');
@@ -647,6 +622,8 @@ app.post('/deleteposting', (req, res) => {
    
   });
 });
+
+
 
 // Start the server
 app.listen(port, () => {
