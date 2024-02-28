@@ -30,6 +30,8 @@ app.use(express.json());
 
 // API Routes
 
+// SOLDIER Queries
+
 app.post('/soldierdetails', (req, res) => {
   console.log(req.body.car)
   let query = `SELECT * FROM soldier`;
@@ -48,24 +50,6 @@ app.post('/soldierdetails', (req, res) => {
   }
 );
 
-
-app.post('/postingdetails', (req, res) => {
-  console.log(req.body.car)
-  let query = `SELECT * FROM posting`;
-  console.log(query);
-    db.query(query, (err, results) => {
-      
-      if (err) {
-        res.status(500).send('Internal Server Error');
-        return;
-      }
-      
-      console.log(results)
-      res.json(results);
-      
-    });
-  }
-);
 
 
 
@@ -178,6 +162,52 @@ app.post('/deleteposting', (req, res) => {
     console.log(query);
   });
 });
+
+
+app.post('/searchsoldier', (req, res) => {
+
+  const soldier = req.body.soldier;
+
+  let search = `'%${soldier}%'`
+
+  let query = `SELECT * FROM SOLDIER WHERE SOLDIER_ID LIKE ${search} OR NAME LIKE ${search}`;
+
+  console.log(query);
+    db.query(query, (err, results) => {
+      
+      if (err) {
+        res.status(500).send('Internal Server Error');
+        return;
+      }
+      
+      console.log(results)
+      res.json(results);
+      
+    });
+  }
+);
+
+
+
+// POSTINGS Queries
+
+app.post('/postingdetails', (req, res) => {
+  console.log(req.body.car)
+  let query = `SELECT * FROM posting`;
+  console.log(query);
+    db.query(query, (err, results) => {
+      
+      if (err) {
+        res.status(500).send('Internal Server Error');
+        return;
+      }
+      
+      console.log(results)
+      res.json(results);
+      
+    });
+  }
+);
 
 // Start the server
 app.listen(port, () => {
