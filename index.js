@@ -458,7 +458,7 @@ app.post('/viewoperations', (req, res) => {
 
 
 app.post('/updateoperation', (req, res) => {
-  const { operation_id, operation_name, outcome, start_date, end_date, solider_id } = req.body;
+  const { operation_id, operation_name, outcome, start_date, end_date, soldier_id } = req.body;
 
   let query =
   `UPDATE soldier SET 
@@ -630,8 +630,3 @@ app.listen(port, () => {
     console.log(`Server is running on http://localhost:${port}`);
 });
 
-
-
-
-hiiii
-hello
