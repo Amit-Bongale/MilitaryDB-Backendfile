@@ -54,7 +54,7 @@ app.post('/soldierdetails', (req, res) => {
 app.post('/insertsoldier', (req, res) => {
   const { soldier_id, name, dob, gender, address, salary } = req.body;
 
-  let query = `INSERT INTO soldier(soldier_id, name, dob, gender, address, Salary) VALUES (? , ? , ? , ? , ? ,?)`;
+  let query = `INSERT INTO soldier(soldier_id, name, dob, gender, address, salary) VALUES (? , ? , ? , ? , ? ,?)`;
 
   db.query(query, [soldier_id, name, dob, gender, address, salary ], (err, results) => {
 
@@ -190,13 +190,13 @@ app.post('/departmentdetails', (req, res) => {
 
 
 app.post('/insertdepartment', (req, res) => {
-  const { department_id, department_name, department_location, soldier_id } = req.body;
+  const { department_id, department_Name, department_Location, soldier_id } = req.body;
 
-  let query = `INSERT INTO department(department_id, department_name, department_location, soldier_id) VALUES (? , ? , ? ,?)`;
+  let query = `INSERT INTO department(department_id, department_Name, department_Location, soldier_id) VALUES (? , ? , ? ,?)`;
 
   console.log(query);
 
-  db.query(query, [department_id, department_name, department_location, soldier_id ], (err, results) => {
+  db.query(query, [department_id, department_Name, department_Location, soldier_id ], (err, results) => {
 
     if (err) {
       console.error('Error inserting data:', err);
@@ -306,11 +306,11 @@ app.post('/medaldetails', (req, res) => {
 
 
 app.post('/insertmedal', (req, res) => {
-  const { medal_id, medal_name, soldier_id } = req.body;
+  const { medal_id, medalName, soldier_id } = req.body;
 
-  let query = `INSERT INTO  MEDALS(medal_id, medal_name, soldier_id) VALUES (? , ? , ?)`;
+  let query = `INSERT INTO  MEDALS(medal_id, medalName, soldier_id) VALUES (? , ? , ?)`;
 
-  db.query(query, [medal_id, medal_name, soldier_id ], (err, results) => {
+  db.query(query, [medal_id, medalName, soldier_id ], (err, results) => {
 
     if (err) {
       console.error('Error inserting data:', err);
@@ -533,11 +533,11 @@ app.post('/postingdetails', (req, res) => {
 
 
 app.post('/insertposting', (req, res) => {
-  const { post_id, start_date, end_date, location, address, salary } = req.body;
+  const { post_id, start_date, end_date, location, soldier_id } = req.body;
 
-  let query = `INSERT INTO posting(post_id, start_date, end_date, location, address, salary) VALUES (? , ? , ? , ? , ? ,?)`;
+  let query = `INSERT INTO posting(post_id, start_date, end_date, location, soldier_id) VALUES (? , ? , ? , ? , ? ,?)`;
 
-  db.query(query, [post_id, start_date, end_date, location, address, salary ], (err, results) => {
+  db.query(query, [post_id, start_date, end_date, location, soldier_id ], (err, results) => {
 
     if (err) {
       console.error('Error inserting data:', err);
