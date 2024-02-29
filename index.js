@@ -210,11 +210,14 @@ app.post('/insertdepartment', (req, res) => {
 });
 
 
-app.post('/viewdepartments', (req, res) => {
+app.post('/viewdepartment', (req, res) => {
 
   const department_id = req.body.department_id;
 
   let query = `SELECT  *  FROM department WHERE department_id = ?`;
+
+  console.log(query)
+
   db.query(query,[department_id],(err, results) => {
 
     if (err) {
@@ -233,13 +236,13 @@ app.post('/viewdepartments', (req, res) => {
 
 
 app.post('/updatedepartment', (req, res) => {
-  const { department_id, department_name, department_location, soldier_id } = req.body;
+  const { department_id, department_Name, department_Location, soldier_id } = req.body;
 
   let query =
   `UPDATE department SET 
-  department_name = '${department_name}',
-  department_location = '${department_location}',
-  soldier_id = '${soldier_id}
+  department_Name = '${department_Name}',
+  department_Location = '${department_Location}',
+  soldier_id = '${soldier_id}'
   WHERE department_id = '${department_id}'`;
 
   db.query(query,  (err, results) => {
@@ -347,12 +350,12 @@ app.post('/viewmedals', (req, res) => {
 
 
 app.post('/updatemedal', (req, res) => {
-  const { medal_id, medal_name, soldier_id } = req.body;
+  const { medal_id, medalName, soldier_id } = req.body;
 
   let query =
   `UPDATE medals SET 
-  medal_name = '${medal_name}',
-  solider_id = '${soldier_id}',
+  medalName = '${medalName}',
+  soldier_id = '${soldier_id}'
   WHERE medal_id = '${medal_id}'`;
 
   db.query(query,  (err, results) => {
@@ -461,13 +464,12 @@ app.post('/updateoperation', (req, res) => {
   const { operation_id, operation_name, outcome, start_date, end_date, soldier_id } = req.body;
 
   let query =
-  `UPDATE soldier SET 
-  operation_id = '${operation_id}',
+  `UPDATE operation SET 
   operation_name = '${operation_name}',
   outcome = '${outcome}',
   start_date = '${start_date}',
-  end_date = '${end_date}'
-  soldier_id = '${soldier_id}',
+  end_date = '${end_date}',
+  soldier_id = '${soldier_id}'
   WHERE operation_id = '${operation_id}'`;
 
   db.query(query,  (err, results) => {
@@ -555,7 +557,7 @@ app.post('/viewpostings', (req, res) => {
 
   const post_id = req.body.post_id;
 
-  let query = `SELECT  *  FROM posting WHERE posting_id = ?`;
+  let query = `SELECT  *  FROM posting WHERE post_id = ?`;
   db.query(query,[post_id],(err, results) => {
 
     if (err) {
@@ -574,16 +576,14 @@ app.post('/viewpostings', (req, res) => {
 
 
 app.post('/updateposting', (req, res) => {
-  const { post_id, start_date, end_date, location, address, salary } = req.body;
+  const { post_id, start_date, end_date, location } = req.body;
 
   let query =
   `UPDATE posting SET 
   post_id = '${post_id}',
   start_date = '${start_date}',
   end_date = '${end_date}',
-  location = '${location}',
-  address = '${address}',
-  salary = '${salary}'
+  location = '${location}'
   WHERE post_id = '${post_id}'`;
 
   db.query(query,  (err, results) => {
@@ -629,4 +629,3 @@ app.post('/deleteposting', (req, res) => {
 app.listen(port, () => {
     console.log(`Server is running on http://localhost:${port}`);
 });
-
