@@ -608,7 +608,7 @@ app.post('/deleteposting', (req, res) => {
 
   const post_id = req.body.post_id;
 
-  let query = `DELETE FROM posting WHERE posting_id = ?`;
+  let query = `DELETE FROM posting WHERE post_id = ?`;
   console.log(query);
   db.query(query,[post_id],(err, results) => {
     
@@ -622,6 +622,32 @@ app.post('/deleteposting', (req, res) => {
    
   });
 });
+
+
+
+
+app.post('/searchalldetails', (req, res) => {
+
+  const data = req.body.data;
+
+  let searchdata = `'%${data}%'`
+
+  let query = `SELECT * FROM soldierdetails WHERE soldier_id LIKE ${searchdata} OR soldier_name LIKE ${searchdata}`;
+
+  console.log(query);
+    db.query(query, (err, results) => {
+      
+      if (err) {
+        res.status(500).send('Internal Server Error');
+        return;
+      }
+      
+      console.log(results)
+      res.json(results);
+      
+    });
+  }
+);
 
 
 
