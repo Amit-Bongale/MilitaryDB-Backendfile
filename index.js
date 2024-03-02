@@ -575,13 +575,14 @@ app.post('/viewpostings', (req, res) => {
 
 
 app.post('/updateposting', (req, res) => {
-  const { post_id, start_date, end_date, location } = req.body;
+  const { post_id, start_date, end_date, soldier_id, location } = req.body;
 
   let query =
   `UPDATE posting SET 
   post_id = '${post_id}',
   start_date = '${start_date}',
   end_date = '${end_date}',
+  soldier_id ='${soldier_id}',
   location = '${location}'
   WHERE post_id = '${post_id}'`;
 
@@ -631,7 +632,7 @@ app.post('/searchalldetails', (req, res) => {
 
   let searchdata = `'%${data}%'`
 
-  let query = `SELECT * FROM soldierdetails WHERE soldier_id LIKE ${searchdata} OR soldier_name LIKE ${searchdata}`;
+  let query = `SELECT * FROM soldier_details WHERE soldier_id LIKE ${searchdata} OR soldier_name LIKE ${searchdata}`;
 
   console.log(query);
     db.query(query, (err, results) => {
