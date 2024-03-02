@@ -61,19 +61,19 @@ insert into `posting`(`post_id`, `start_date`, `end_date`, `soldier_id`, `locati
 operation values:
 
 
-insert into `operation`(`operation_id`, `operation_name`, `outcome`, `start_date`, `end_date`, `soldier_id`) values ('O001', 'Operation Alpha', 'Success', '2022-01-10', '2022-01-15', 'S1001');
+insert into `operation`(`operation_id`, `operation_name`, `outcome`, `start_date`, `end_date`, `department_id`, `soldier_id`) values ('O001', 'Operation Alpha', 'Success', '2022-01-10', '2022-01-15', 'D001', 'S1001');
 
 
-insert into `operation`(`operation_id`, `operation_name`, `outcome`, `start_date`, `end_date`, `soldier_id`) values ('O002', 'Operation Bravo', 'Failure', '2022-02-05', '2022-02-10', 'S1002');
+insert into `operation`(`operation_id`, `operation_name`, `outcome`, `start_date`, `end_date`,`department_id`, `soldier_id`) values ('O002', 'Operation Bravo', 'Failure', '2022-02-05', '2022-02-10', 'D002','S1002');
 
 
-insert into `operation`(`operation_id`, `operation_name`, `outcome`, `start_date`, `end_date`, `soldier_id`) values ('O003', 'Operation Charlie', 'Success', '2022-03-20', '2022-03-25', 'S1003');
+insert into `operation`(`operation_id`, `operation_name`, `outcome`, `start_date`, `end_date`,`department_id`, `soldier_id`) values ('O003', 'Operation Charlie', 'Success', '2022-03-20', '2022-03-25', 'D003','S1003');
 
 
-insert into `operation`(`operation_id`, `operation_name`, `outcome`, `start_date`, `end_date`, `soldier_id`) values ('O004', 'Operation Delta', 'Success', '2022-04-15', '2022-04-20', 'S1004');
+insert into `operation`(`operation_id`, `operation_name`, `outcome`, `start_date`, `end_date`,`department_id`, `soldier_id`) values ('O004', 'Operation Delta', 'Success', '2022-04-15', '2022-04-20', 'D004','S1004');
 
 
-insert into `operation`(`operation_id`, `operation_name`, `outcome`, `start_date`, `end_date`, `soldier_id`) values ('O005', 'Operation Echo', 'Failure', '2022-05-01', '2022-05-05', 'S1005');
+insert into `operation`(`operation_id`, `operation_name`, `outcome`, `start_date`, `end_date`,`department_id`, `soldier_id`) values ('O005', 'Operation Echo', 'Failure', '2022-05-01', '2022-05-05', 'D005','S1005');
 
 
 view:

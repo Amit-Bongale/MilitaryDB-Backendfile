@@ -15,7 +15,7 @@ department_name varchar(20),
 department_location varchar(20),
 soldier_id varchar(20),
 primary key(department_id,soldier_id),
-foreign key (soldier_id) references soldier(soldier_id)
+foreign key (soldier_id) references soldier(soldier_id) on delete cascade
 );
 
 create table medals
@@ -24,7 +24,7 @@ medal_id varchar(20),
 medal_name varchar (50),
 soldier_id varchar (20),
 primary key(medal_id,soldier_id),
-foreign key (soldier_id) references soldier(soldier_id)
+foreign key (soldier_id) references soldier(soldier_id) on delete cascade
 );
 
 create table posting
@@ -34,7 +34,7 @@ start_date date, end_date date,
 soldier_id varchar (20),
 location varchar (20),
 primary key(post_id,soldier_id),
-foreign key (soldier_id) references soldier(soldier_id)
+foreign key (soldier_id) references soldier(soldier_id) on delete cascade
 );
 
 create table operation
@@ -44,7 +44,9 @@ operation_name varchar(20),
 outcome varchar(10),
 start_date date,
 end_date date,
+department_id varchar(20),
 soldier_id varchar(20),
-primary key (operation_id, soldier_id),
-foreign key (soldier_id) references  soldier(soldier_id)
+primary key (operation_id, soldier_id , department_id),
+foreign key (soldier_id) references  soldier(soldier_id) on delete cascade,
+foreign key (department_id) references department(department_id) on delete cascade
 );

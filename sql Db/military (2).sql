@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 02, 2024 at 08:15 AM
+-- Generation Time: Mar 02, 2024 at 02:23 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -49,7 +49,6 @@ CREATE TABLE `department` (
 --
 
 INSERT INTO `department` (`department_id`, `department_name`, `department_location`, `soldier_id`) VALUES
-('D001', 'marketting', 'banglore', '123'),
 ('D001', 'Marketing', 'New York', 'S1002'),
 ('D002', 'Finance', 'Chicago', 'S1003'),
 ('D003', 'Human Resources', 'San Francisco', 'S1004'),
@@ -73,7 +72,6 @@ CREATE TABLE `medals` (
 --
 
 INSERT INTO `medals` (`medal_id`, `medal_name`, `soldier_id`) VALUES
-('M001', 'bronze', '123'),
 ('M001', 'Bronze Star', 'S1001'),
 ('M002', 'Silver Star', 'S1002'),
 ('M003', 'Gold Medal', 'S1003'),
@@ -92,6 +90,7 @@ CREATE TABLE `operation` (
   `outcome` varchar(10) DEFAULT NULL,
   `start_date` date DEFAULT NULL,
   `end_date` date DEFAULT NULL,
+  `department_id` varchar(20) NOT NULL,
   `soldier_id` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -99,13 +98,12 @@ CREATE TABLE `operation` (
 -- Dumping data for table `operation`
 --
 
-INSERT INTO `operation` (`operation_id`, `operation_name`, `outcome`, `start_date`, `end_date`, `soldier_id`) VALUES
-('O001', 'testop', 'sucess', '2024-03-13', '2024-03-21', '123'),
-('O001', 'Operation Alpha', 'Success', '2022-01-10', '2022-01-15', 'S1001'),
-('O002', 'Operation Bravo', 'Failure', '2022-02-05', '2022-02-10', 'S1002'),
-('O003', 'Operation Charlie', 'Success', '2022-03-20', '2022-03-25', 'S1003'),
-('O004', 'Operation Delta', 'Success', '2022-04-15', '2022-04-20', 'S1004'),
-('O005', 'Operation Echo', 'Failure', '2022-05-01', '2022-05-05', 'S1005');
+INSERT INTO `operation` (`operation_id`, `operation_name`, `outcome`, `start_date`, `end_date`, `department_id`, `soldier_id`) VALUES
+('O001', 'Operation Alpha', 'Success', '2022-01-10', '2022-01-15', 'D001', 'S1001'),
+('O002', 'Operation Bravo', 'Failure', '2022-02-05', '2022-02-10', 'D002', 'S1002'),
+('O003', 'Operation Charlie', 'Success', '2022-03-20', '2022-03-25', 'D003', 'S1003'),
+('O004', 'Operation Delta', 'Success', '2022-04-15', '2022-04-20', 'D004', 'S1004'),
+('O005', 'Operation Echo', 'Failure', '2022-05-01', '2022-05-05', 'D005', 'S1005');
 
 -- --------------------------------------------------------
 
@@ -126,7 +124,6 @@ CREATE TABLE `posting` (
 --
 
 INSERT INTO `posting` (`post_id`, `start_date`, `end_date`, `soldier_id`, `location`) VALUES
-('P001', '2024-03-07', '2024-03-22', '123', 'delhi'),
 ('P001', '2022-01-10', '2022-03-15', 'S1001', 'Base A'),
 ('P002', '2022-02-05', '2022-04-20', 'S1002', 'Base B'),
 ('P003', '2022-03-20', '2022-05-25', 'S1003', 'Base C'),
@@ -153,7 +150,6 @@ CREATE TABLE `soldier` (
 --
 
 INSERT INTO `soldier` (`soldier_id`, `name`, `dob`, `gender`, `address`, `salary`) VALUES
-('123', 'test', '2018-03-07', 'male', 'banglore', 5600),
 ('S1001', 'John Doe', '1990-05-15', 'Male', '123 Main Street, Cit', 50000),
 ('S1002', 'Jane Smith', '1988-08-20', 'Female', '456 Oak Avenue, Town', 55000),
 ('S1003', 'Bob Johnson', '1995-03-10', 'Male', '789 Pine Street, Vil', 48000),
@@ -217,8 +213,9 @@ ALTER TABLE `medals`
 -- Indexes for table `operation`
 --
 ALTER TABLE `operation`
-  ADD PRIMARY KEY (`operation_id`,`soldier_id`),
-  ADD KEY `soldier_id` (`soldier_id`);
+  ADD PRIMARY KEY (`operation_id`,`soldier_id`,`department_id`),
+  ADD KEY `soldier_id` (`soldier_id`),
+  ADD KEY `department_id` (`department_id`);
 
 --
 -- Indexes for table `posting`
@@ -241,25 +238,26 @@ ALTER TABLE `soldier`
 -- Constraints for table `department`
 --
 ALTER TABLE `department`
-  ADD CONSTRAINT `department_ibfk_1` FOREIGN KEY (`soldier_id`) REFERENCES `soldier` (`soldier_id`);
+  ADD CONSTRAINT `department_ibfk_1` FOREIGN KEY (`soldier_id`) REFERENCES `soldier` (`soldier_id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `medals`
 --
 ALTER TABLE `medals`
-  ADD CONSTRAINT `medals_ibfk_1` FOREIGN KEY (`soldier_id`) REFERENCES `soldier` (`soldier_id`);
+  ADD CONSTRAINT `medals_ibfk_1` FOREIGN KEY (`soldier_id`) REFERENCES `soldier` (`soldier_id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `operation`
 --
 ALTER TABLE `operation`
-  ADD CONSTRAINT `operation_ibfk_1` FOREIGN KEY (`soldier_id`) REFERENCES `soldier` (`soldier_id`);
+  ADD CONSTRAINT `operation_ibfk_1` FOREIGN KEY (`soldier_id`) REFERENCES `soldier` (`soldier_id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `operation_ibfk_2` FOREIGN KEY (`department_id`) REFERENCES `department` (`department_id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `posting`
 --
 ALTER TABLE `posting`
-  ADD CONSTRAINT `posting_ibfk_1` FOREIGN KEY (`soldier_id`) REFERENCES `soldier` (`soldier_id`);
+  ADD CONSTRAINT `posting_ibfk_1` FOREIGN KEY (`soldier_id`) REFERENCES `soldier` (`soldier_id`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
