@@ -379,9 +379,9 @@ app.post('/deletemedal', (req, res) => {
 
   const medal_id = req.body.medal_id;
 
-  let query = `DELETE FROM medals WHERE medal_id = ?`;
+  let query = `DELETE FROM medals WHERE medal_id = '${medal_id}'`;
   console.log(query);
-  db.query(query,[medal_id],(err, results) => {
+  db.query(query, (err, results) => {
 
     if (err) {
       console.error('Error inserting data:', err);
@@ -419,11 +419,11 @@ app.post('/operationdetails', (req, res) => {
 
 
 app.post('/insertoperation', (req, res) => {
-  const { operation_id, operation_name, outcome, start_date, end_date, soldier_id } = req.body;
+  const { operation_id, operation_name, outcome, start_date, end_date,department_id, soldier_id } = req.body;
 
-  let query = `INSERT INTO operation(operation_id, operation_name, outcome, start_date, end_date, soldier_id) VALUES (? , ? , ? , ? , ? , ? )`;
+  let query = `INSERT INTO operation(operation_id, operation_name, outcome, start_date, end_date, department_id, soldier_id) VALUES (? , ? , ? , ? , ? , ? )`;
 
-  db.query(query, [operation_id, operation_name, outcome, start_date, end_date, soldier_id ], (err, results) => {
+  db.query(query, [operation_id, operation_name, outcome, start_date, end_date, department_id, soldier_id ], (err, results) => {
 
     if (err) {
       console.error('Error inserting data:', err);
@@ -460,7 +460,7 @@ app.post('/viewoperations', (req, res) => {
 
 
 app.post('/updateoperation', (req, res) => {
-  const { operation_id, operation_name, outcome, start_date, end_date, soldier_id } = req.body;
+  const { operation_id, operation_name, outcome, start_date, end_date, department_id, soldier_id } = req.body;
 
   let query =
   `UPDATE operation SET 
@@ -468,6 +468,7 @@ app.post('/updateoperation', (req, res) => {
   outcome = '${outcome}',
   start_date = '${start_date}',
   end_date = '${end_date}',
+  department_id = '${department_id}',
   soldier_id = '${soldier_id}'
   WHERE operation_id = '${operation_id}'`;
 
