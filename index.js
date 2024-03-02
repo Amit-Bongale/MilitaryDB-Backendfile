@@ -189,13 +189,13 @@ app.post('/departmentdetails', (req, res) => {
 
 
 app.post('/insertdept', (req, res) => {
-  const { department_id, department_Name, department_Location, soldier_id } = req.body;
+  const { department_id, department_name, department_location, soldier_id } = req.body;
 
-  let query = `INSERT INTO department(department_id, department_Name, department_Location, soldier_id) VALUES (? , ? , ? ,?)`;
+  let query = `INSERT INTO department(department_id, department_name, department_location, soldier_id) VALUES (? , ? , ? ,?)`;
 
   console.log(query);
 
-  db.query(query, [department_id, department_Name, department_Location, soldier_id ], (err, results) => {
+  db.query(query, [department_id, department_name, department_location, soldier_id ], (err, results) => {
 
     if (err) {
       console.error('Error inserting data:', err);
@@ -235,12 +235,12 @@ app.post('/viewdepartment', (req, res) => {
 
 
 app.post('/updatedepartment', (req, res) => {
-  const { department_id, department_Name, department_Location, soldier_id } = req.body;
+  const { department_id, department_name, department_location, soldier_id } = req.body;
 
   let query =
   `UPDATE department SET 
-  department_Name = '${department_Name}',
-  department_Location = '${department_Location}',
+  department_Name = '${department_name}',
+  department_Location = '${department_location}',
   soldier_id = '${soldier_id}'
   WHERE department_id = '${department_id}'`;
 
@@ -308,11 +308,11 @@ app.post('/medaldetails', (req, res) => {
 
 
 app.post('/insertmedal', (req, res) => {
-  const { medal_id, medalName, soldier_id } = req.body;
+  const { medal_id, medal_name, soldier_id } = req.body;
 
-  let query = `INSERT INTO  MEDALS(medal_id, medalName, soldier_id) VALUES (? , ? , ?)`;
+  let query = `INSERT INTO  MEDALS(medal_id, medal_name, soldier_id) VALUES (? , ? , ?)`;
 
-  db.query(query, [medal_id, medalName, soldier_id ], (err, results) => {
+  db.query(query, [medal_id, medal_name, soldier_id ], (err, results) => {
 
     if (err) {
       console.error('Error inserting data:', err);
@@ -349,11 +349,11 @@ app.post('/viewmedals', (req, res) => {
 
 
 app.post('/updatemedal', (req, res) => {
-  const { medal_id, medalName, soldier_id } = req.body;
+  const { medal_id, medal_name, soldier_id } = req.body;
 
   let query =
   `UPDATE medals SET 
-  medalName = '${medalName}',
+  medal_name = '${medal_name}',
   soldier_id = '${soldier_id}'
   WHERE medal_id = '${medal_id}'`;
 
