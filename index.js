@@ -283,6 +283,32 @@ app.post('/deletedepartment', (req, res) => {
 
 
 
+app.post('/searchdepartment', (req, res) => {
+
+  const department = req.body.department;
+
+  let search = `'%${department}%'`
+
+  let query = `SELECT * FROM department WHERE department_id LIKE ${search} OR department_name LIKE ${search}`;
+
+  console.log(query);
+
+    db.query(query, (err, results) => {
+      
+      if (err) {
+        res.status(500).send('Internal Server Error');
+        return;
+      }
+      
+      console.log(results)
+      res.json(results);
+      
+    });
+  }
+);
+
+
+
 
 // Medals Query
 
@@ -393,6 +419,31 @@ app.post('/deletemedal', (req, res) => {
    
   });
 });
+
+
+app.post('/searchmedals', (req, res) => {
+
+  const medal = req.body.medals;
+
+  let search = `'%${medal}%'`
+
+  let query = `SELECT * FROM medals WHERE medal_id LIKE ${search} OR medal_name LIKE ${search} OR soldier_id LIKE ${search}`;
+
+  console.log(query);
+
+    db.query(query, (err, results) => {
+      
+      if (err) {
+        res.status(500).send('Internal Server Error');
+        return;
+      }
+      
+      console.log(results)
+      res.json(results);
+      
+    });
+  }
+);
 
 
 
@@ -510,6 +561,31 @@ app.post('/deleteoperation', (req, res) => {
 });
 
 
+app.post('/searchoperation', (req, res) => {
+
+  const operation = req.body.operation;
+
+  let search = `'%${operation}%'`
+
+  let query = `SELECT * FROM operation WHERE operation_id LIKE ${search} OR operation_name LIKE ${search}`;
+
+  console.log(query);
+
+    db.query(query, (err, results) => {
+      
+      if (err) {
+        res.status(500).send('Internal Server Error');
+        return;
+      }
+      
+      console.log(results)
+      res.json(results);
+      
+    });
+  }
+);
+
+
 
 // Posting Query
 
@@ -625,7 +701,33 @@ app.post('/deleteposting', (req, res) => {
 });
 
 
+app.post('/searchposting', (req, res) => {
 
+  const posting = req.body.posting;
+
+  let search = `'%${posting}%'`
+
+  let query = `SELECT * FROM posting WHERE post_id LIKE ${search} OR soldier_id LIKE ${search} OR location LIKE ${search}`;
+
+  console.log(query);
+
+    db.query(query, (err, results) => {
+      
+      if (err) {
+        res.status(500).send('Internal Server Error');
+        return;
+      }
+      
+      console.log(results)
+      res.json(results);
+      
+    });
+  }
+);
+
+
+
+// Home Views
 
 app.post('/searchalldetails', (req, res) => {
 

@@ -13,7 +13,7 @@ insert into `soldier`(`soldier_id`, `name`, `dob`, `gender`, `address`, `salary`
 
 
 
-depart ment values:
+department values:
 
 insert into `department`(`department_id`, `department_name`, `department_location`, `soldier_id`) values ('D001', 'Marketing', 'New York', 'S1002');
 
