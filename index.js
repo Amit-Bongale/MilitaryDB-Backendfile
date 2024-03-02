@@ -188,7 +188,7 @@ app.post('/departmentdetails', (req, res) => {
 );
 
 
-app.post('/insertdepartment', (req, res) => {
+app.post('/insertdept', (req, res) => {
   const { department_id, department_Name, department_Location, soldier_id } = req.body;
 
   let query = `INSERT INTO department(department_id, department_Name, department_Location, soldier_id) VALUES (? , ? , ? ,?)`;
@@ -421,7 +421,7 @@ app.post('/operationdetails', (req, res) => {
 app.post('/insertoperation', (req, res) => {
   const { operation_id, operation_name, outcome, start_date, end_date, soldier_id } = req.body;
 
-  let query = `INSERT INTO operation(operation_id, operation_name, outcome, start_date, end_date, soldier_id) VALUES (? , ? , ? , ? , ? , ? ,?)`;
+  let query = `INSERT INTO operation(operation_id, operation_name, outcome, start_date, end_date, soldier_id) VALUES (? , ? , ? , ? , ? , ? )`;
 
   db.query(query, [operation_id, operation_name, outcome, start_date, end_date, soldier_id ], (err, results) => {
 
@@ -536,7 +536,7 @@ app.post('/postingdetails', (req, res) => {
 app.post('/insertposting', (req, res) => {
   const { post_id, start_date, end_date, soldier_id, location} = req.body;
 
-  let query = `INSERT INTO posting(post_id, start_date, end_date, soldier_id, location) VALUES (? , ? , ? , ? , ? ,?)`;
+  let query = `INSERT INTO posting(post_id, start_date, end_date, soldier_id, location) VALUES (? , ? , ? , ? , ?)`;
 
   db.query(query, [post_id, start_date, end_date, soldier_id, location ], (err, results) => {
 
