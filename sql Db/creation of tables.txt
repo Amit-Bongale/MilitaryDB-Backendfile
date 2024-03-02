@@ -1,0 +1,50 @@
+create table soldier
+(
+soldier_id varchar(20) primary key,
+name varchar(20),
+dob date,
+gender char(10),
+address varchar(20),
+salary float
+);
+
+create table department 
+(
+department_id varchar(20),
+department_name varchar(20),
+department_location varchar(20),
+soldier_id varchar(20),
+primary key(department_id,soldier_id),
+foreign key (soldier_id) references soldier(soldier_id)
+);
+
+create table medals
+(
+medal_id varchar(20),
+medal_name varchar (50),
+soldier_id varchar (20),
+primary key(medal_id,soldier_id),
+foreign key (soldier_id) references soldier(soldier_id)
+);
+
+create table posting
+(
+post_id varchar (20),
+start_date date, end_date date,
+soldier_id varchar (20),
+location varchar (20),
+primary key(post_id,soldier_id),
+foreign key (soldier_id) references soldier(soldier_id)
+);
+
+create table operation
+(
+operation_id varchar(20),
+operation_name varchar(20),
+outcome varchar(10),
+start_date date,
+end_date date,
+soldier_id varchar(20),
+primary key (operation_id, soldier_id),
+foreign key (soldier_id) references  soldier(soldier_id)
+);

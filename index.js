@@ -651,6 +651,27 @@ app.post('/searchalldetails', (req, res) => {
 
 
 
+app.post('/countsoldiers', (req, res) => {
+
+  let query = `SELECT * FROM no_of_soldier`;
+
+  console.log(query);
+    db.query(query, (err, results) => {
+      
+      if (err) {
+        res.status(500).send('Internal Server Error');
+        return;
+      }
+      
+      console.log(results)
+      res.json(results);
+      
+    });
+  }
+);
+
+
+
 // Start the server
 app.listen(port, () => {
     console.log(`Server is running on http://localhost:${port}`);
