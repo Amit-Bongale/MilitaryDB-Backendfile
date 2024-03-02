@@ -652,7 +652,7 @@ app.post('/searchalldetails', (req, res) => {
 
 app.post('/countsoldiers', (req, res) => {
 
-  let query = `SELECT * FROM no_of_soldier`;
+  let query = `SELECT * FROM count_soldier`;
 
   console.log(query);
     db.query(query, (err, results) => {
