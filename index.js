@@ -38,7 +38,7 @@ app.post('/soldierdetails', (req, res) => {
     db.query(query, (err, results) => {
       
       if (err) {
-        res.status(500).send('Internal Server Error');
+       res.status(500).json({ sqlMessage: err.sqlMessage });
         return;
       }
       
@@ -59,13 +59,17 @@ app.post('/insertsoldier', (req, res) => {
 
     if (err) {
       console.error('Error inserting data:', err);
-      res.status(500).send('Internal Server Error');
+      res.status(500).json({ sqlMessage: err.sqlMessage });
       return;
     }
 
     console.log(results);
+
+    res.status(200).json({ message: 'Soldier inserted successfully'});
     
   });
+
+
 });
 
 
@@ -78,7 +82,7 @@ app.post('/viewsoldiers', (req, res) => {
 
     if (err) {
       console.error('Error inserting data:', err);
-      res.status(500).send('Internal Server Error');
+     res.status(500).json({ sqlMessage: err.sqlMessage });
       return;
     }
 
@@ -107,14 +111,15 @@ app.post('/updatesoldier', (req, res) => {
 
     if (err) {
       console.error('Error inserting data:', err);
-      res.status(500).send('Internal Server Error');
+      res.status(500).json({ sqlMessage: err.sqlMessage });
       return;
     }
 
     console.log(results);
     console.log(query);
-    console.log('Soldier updated successfully');
-    res.status(200).send('Soldier updated successfully');
+
+
+    res.status(200).json('Soldier updated successfully');
     
   });
 });
@@ -131,11 +136,13 @@ app.post('/deletesoldier', (req, res) => {
 
     if (err) {
       console.error('Error inserting data:', err);
-      res.status(500).send('Internal Server Error');
+      res.status(500).json({ sqlMessage: err.sqlMessage });
       return;
     }
 
     console.log(results);
+
+    res.status(200).json({ message: 'Soldier inserted successfully'});
    
   });
 });
@@ -154,7 +161,7 @@ app.post('/searchsoldier', (req, res) => {
     db.query(query, (err, results) => {
       
       if (err) {
-        res.status(500).send('Internal Server Error');
+        res.status(500).json({ sqlMessage: err.sqlMessage });
         return;
       }
       
@@ -176,7 +183,7 @@ app.post('/departmentdetails', (req, res) => {
     db.query(query, (err, results) => {
       
       if (err) {
-        res.status(500).send('Internal Server Error');
+        res.status(500).json({ sqlMessage: err.sqlMessage });
         return;
       }
       
@@ -199,11 +206,13 @@ app.post('/insertdept', (req, res) => {
 
     if (err) {
       console.error('Error inserting data:', err);
-      res.status(500).send('Internal Server Error');
+      res.status(500).json({ sqlMessage: err.sqlMessage });
       return;
     }
     
     console.log(results);
+
+    res.status(200).json({ message: 'Department inserted successfully'});
     
   });
 });
@@ -221,7 +230,7 @@ app.post('/viewdepartment', (req, res) => {
 
     if (err) {
       console.error('Error inserting data:', err);
-      res.status(500).send('Internal Server Error');
+      res.status(500).json({ sqlMessage: err.sqlMessage });
       return;
     }
 
@@ -248,14 +257,15 @@ app.post('/updatedepartment', (req, res) => {
 
     if (err) {
       console.error('Error inserting data:', err);
-      res.status(500).send('Internal Server Error');
+      res.status(500).json({ sqlMessage: err.sqlMessage });
       return;
     }
 
     console.log(results);
     console.log(query);
     console.log('Department updated successfully');
-    res.status(200).send('Department updated successfully');
+    
+    res.status(200).json({ message: 'Department Updated successfully'});
     
   });
 });
@@ -272,7 +282,7 @@ app.post('/deletedepartment', (req, res) => {
 
     if (err) {
       console.error('Error inserting data:', err);
-      res.status(500).send('Internal Server Error');
+      res.status(500).json({ sqlMessage: err.sqlMessage });
       return;
     }
 
@@ -296,7 +306,7 @@ app.post('/searchdepartment', (req, res) => {
     db.query(query, (err, results) => {
       
       if (err) {
-        res.status(500).send('Internal Server Error');
+        res.status(500).json({ sqlMessage: err.sqlMessage });
         return;
       }
       
@@ -319,7 +329,7 @@ app.post('/medaldetails', (req, res) => {
     db.query(query, (err, results) => {
       
       if (err) {
-        res.status(500).send('Internal Server Error');
+        res.status(500).json({ sqlMessage: err.sqlMessage });
         return;
       }
       
@@ -342,11 +352,13 @@ app.post('/insertmedal', (req, res) => {
 
     if (err) {
       console.error('Error inserting data:', err);
-      res.status(500).send('Internal Server Error');
+      res.status(500).json({ sqlMessage: err.sqlMessage });
       return;
     }
 
     console.log(results);
+
+    res.status(200).json({ message: 'Medala inserted successfully'});
     
   });
 });
@@ -361,7 +373,7 @@ app.post('/viewmedals', (req, res) => {
 
     if (err) {
       console.error('Error inserting data:', err);
-      res.status(500).send('Internal Server Error');
+      res.status(500).json({ sqlMessage: err.sqlMessage });
       return;
     }
 
@@ -387,14 +399,15 @@ app.post('/updatemedal', (req, res) => {
 
     if (err) {
       console.error('Error inserting data:', err);
-      res.status(500).send('Internal Server Error');
+      res.status(500).json({ sqlMessage: err.sqlMessage });
       return;
     }
 
     console.log(results);
     console.log(query);
     console.log('Medal updated successfully');
-    res.status(200).send('Medal updated successfully');
+    
+    res.status(200).json({ message: 'Medals Updated successfully'});
     
   });
 });
@@ -411,7 +424,7 @@ app.post('/deletemedal', (req, res) => {
 
     if (err) {
       console.error('Error inserting data:', err);
-      res.status(500).send('Internal Server Error');
+      res.status(500).json({ sqlMessage: err.sqlMessage });
       return;
     }
 
@@ -434,7 +447,7 @@ app.post('/searchmedals', (req, res) => {
     db.query(query, (err, results) => {
       
       if (err) {
-        res.status(500).send('Internal Server Error');
+        res.status(500).json({ sqlMessage: err.sqlMessage });
         return;
       }
       
@@ -456,7 +469,7 @@ app.post('/operationdetails', (req, res) => {
     db.query(query, (err, results) => {
       
       if (err) {
-        res.status(500).send('Internal Server Error');
+        res.status(500).json({ sqlMessage: err.sqlMessage });
         return;
       }
       
@@ -472,18 +485,19 @@ app.post('/operationdetails', (req, res) => {
 app.post('/insertoperation', (req, res) => {
   const { operation_id, operation_name, outcome, start_date, end_date,department_id, soldier_id } = req.body;
 
-  let query = `INSERT INTO operation(operation_id, operation_name, outcome, start_date, end_date, department_id, soldier_id) VALUES (? , ? , ? , ? , ? , ? )`;
+  let query = `INSERT INTO operation(operation_id, operation_name, outcome, start_date, end_date, department_id, soldier_id) VALUES (? , ? , ? , ? , ? , ?, ? )`;
 
   db.query(query, [operation_id, operation_name, outcome, start_date, end_date, department_id, soldier_id ], (err, results) => {
 
     if (err) {
       console.error('Error inserting data:', err);
-      res.status(500).send('Internal Server Error');
+      res.status(500).json({ sqlMessage: err.sqlMessage });
       return;
     }
 
     console.log(results);
-    
+
+      res.status(200).json({ message: 'Operations inserted successfully'});
   });
 });
 
@@ -497,7 +511,7 @@ app.post('/viewoperations', (req, res) => {
 
     if (err) {
       console.error('Error inserting data:', err);
-      res.status(500).send('Internal Server Error');
+     res.status(500).json({ sqlMessage: err.sqlMessage });
       return;
     }
 
@@ -527,14 +541,15 @@ app.post('/updateoperation', (req, res) => {
 
     if (err) {
       console.error('Error inserting data:', err);
-      res.status(500).send('Internal Server Error');
+      res.status(500).json({ sqlMessage: err.sqlMessage });
       return;
     }
 
     console.log(results);
     console.log(query);
     console.log('Operation updated successfully');
-    res.status(200).send('Operation updated successfully');
+    
+    res.status(200).json({ message: 'Operation Updated successfully'});
     
   });
 });
@@ -551,7 +566,7 @@ app.post('/deleteoperation', (req, res) => {
 
     if (err) {
       console.error('Error inserting data:', err);
-      res.status(500).send('Internal Server Error');
+     res.status(500).json({ sqlMessage: err.sqlMessage });
       return;
     }
 
@@ -559,7 +574,7 @@ app.post('/deleteoperation', (req, res) => {
    
   });
 });
-
+  
 
 app.post('/searchoperation', (req, res) => {
 
@@ -574,7 +589,7 @@ app.post('/searchoperation', (req, res) => {
     db.query(query, (err, results) => {
       
       if (err) {
-        res.status(500).send('Internal Server Error');
+       res.status(500).json({ sqlMessage: err.sqlMessage });
         return;
       }
       
@@ -596,7 +611,7 @@ app.post('/postingdetails', (req, res) => {
     db.query(query, (err, results) => {
       
       if (err) {
-        res.status(500).send('Internal Server Error');
+       res.status(500).json({ sqlMessage: err.sqlMessage });
         return;
       }
       
@@ -619,13 +634,15 @@ app.post('/insertposting', (req, res) => {
 
     if (err) {
       console.error('Error inserting data:', err);
-      res.status(500).send('Internal Server Error');
+      res.status(500).json({ sqlMessage: err.sqlMessage });
       return;
     }
 
+    res.status(200).json({ message: 'Posting inserted successfully'});
     console.log(results);
-    
+
   });
+
 });
 
 
@@ -638,7 +655,7 @@ app.post('/viewpostings', (req, res) => {
 
     if (err) {
       console.error('Error inserting data:', err);
-      res.status(500).send('Internal Server Error');
+     res.status(500).json({ sqlMessage: err.sqlMessage });
       return;
     }
 
@@ -667,14 +684,15 @@ app.post('/updateposting', (req, res) => {
 
     if (err) {
       console.error('Error inserting data:', err);
-      res.status(500).send('Internal Server Error');
+     res.status(500).json({ sqlMessage: err.sqlMessage });
       return;
     }
 
     console.log(results);
     console.log(query);
     console.log('Posting updated successfully');
-    res.status(200).send('Posting updated successfully');
+    
+    res.status(200).json({ message: 'Posting Updated successfully'});
     
   });
 });
@@ -691,7 +709,7 @@ app.post('/deleteposting', (req, res) => {
     
     if (err) {
       console.error('Error inserting data:', err);
-      res.status(500).send('Internal Server Error');
+     res.status(500).json({ sqlMessage: err.sqlMessage });
       return;
     }
 
@@ -714,7 +732,7 @@ app.post('/searchposting', (req, res) => {
     db.query(query, (err, results) => {
       
       if (err) {
-        res.status(500).send('Internal Server Error');
+       res.status(500).json({ sqlMessage: err.sqlMessage });
         return;
       }
       
@@ -741,7 +759,7 @@ app.post('/searchalldetails', (req, res) => {
     db.query(query, (err, results) => {
       
       if (err) {
-        res.status(500).send('Internal Server Error');
+       res.status(500).json({ sqlMessage: err.sqlMessage });
         return;
       }
       
@@ -762,7 +780,48 @@ app.post('/countsoldiers', (req, res) => {
     db.query(query, (err, results) => {
       
       if (err) {
-        res.status(500).send('Internal Server Error');
+       res.status(500).json({ sqlMessage: err.sqlMessage });
+        return;
+      }
+      
+      console.log(results)
+      res.json(results);
+      
+    });
+  }
+);
+
+
+
+app.post('/countdepartments', (req, res) => {
+
+  let query = `SELECT * FROM count_departments`;
+
+  console.log(query);
+    db.query(query, (err, results) => {
+      
+      if (err) {
+       res.status(500).json({ sqlMessage: err.sqlMessage });
+        return;
+      }
+      
+      console.log(results)
+      res.json(results);
+      
+    });
+  }
+);
+
+
+app.post('/operationsummary', (req, res) => {
+
+  let query = `SELECT * FROM operation_summary`;
+
+  console.log(query);
+    db.query(query, (err, results) => {
+      
+      if (err) {
+       res.status(500).json({ sqlMessage: err.sqlMessage });
         return;
       }
       

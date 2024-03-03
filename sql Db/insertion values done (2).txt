@@ -74,38 +74,3 @@ insert into `operation`(`operation_id`, `operation_name`, `outcome`, `start_date
 
 
 insert into `operation`(`operation_id`, `operation_name`, `outcome`, `start_date`, `end_date`,`department_id`, `soldier_id`) values ('O005', 'Operation Echo', 'Failure', '2022-05-01', '2022-05-05', 'D005','S1005');
-
-
-view:
-
-soldier Details:
-
-
-CREATE VIEW soldier_details AS
-SELECT
-    s.soldier_id,
-    s.name AS soldier_name,
-    d.department_id,
-    d.department_name,
-    o.operation_name,
-    o.outcome,
-    p.post_id,
-    m.medal_name
-FROM
-    soldier s
-JOIN
-    department d ON s.soldier_id = d.soldier_id
-JOIN
-    operation o ON s.soldier_id = o.soldier_id
-JOIN
-    posting p ON s.soldier_id = p.soldier_id
-JOIN
-    medals m ON s.soldier_id = m.soldier_id;
-
-
-
-count soldier:
-
-CREATE view count_soldier (no_of_soldier) as SELECT COUNT(*) from soldier;
-
-

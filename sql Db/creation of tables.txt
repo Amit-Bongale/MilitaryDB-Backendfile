@@ -1,3 +1,5 @@
+--table Creation
+
 create table soldier
 (
 soldier_id varchar(20) primary key,
@@ -50,3 +52,52 @@ primary key (operation_id, soldier_id , department_id),
 foreign key (soldier_id) references  soldier(soldier_id) on delete cascade,
 foreign key (department_id) references department(department_id) on delete cascade
 );
+
+
+
+--view:
+
+--soldier Details:
+
+
+CREATE VIEW soldier_details AS
+SELECT
+    s.soldier_id,
+    s.name AS soldier_name,
+    d.department_id,
+    d.department_name,
+    o.operation_name,
+    o.outcome,
+    p.post_id,
+    m.medal_name
+FROM
+    soldier s
+JOIN
+    department d ON s.soldier_id = d.soldier_id
+JOIN
+    operation o ON s.soldier_id = o.soldier_id
+JOIN
+    posting p ON s.soldier_id = p.soldier_id
+JOIN
+    medals m ON s.soldier_id = m.soldier_id;
+
+
+
+--count soldier:
+
+CREATE view count_soldier (no_of_soldier) as SELECT COUNT(*) from soldier;
+
+
+--count dept:
+
+CREATE VIEW count_departments AS SELECT COUNT(department_id) AS no_of_departments FROM department;
+
+--operation_summary:
+
+REATE VIEW operation_summary AS
+SELECT
+COUNT(operation_id) AS total_operations,
+SUM(CASE WHEN outcome = 'successful' THEN 1 ELSE 0 END) AS successful_operations,
+SUM(CASE WHEN outcome = 'failed' THEN 1 ELSE 0 END) AS failed_operations,
+SUM(CASE WHEN outcome = 'in progress' THEN 1 ELSE 0 END) AS in_progress_operations
+FROM operation;
