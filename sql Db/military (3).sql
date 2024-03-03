@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 02, 2024 at 02:23 PM
+-- Generation Time: Mar 03, 2024 at 05:01 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -20,6 +20,16 @@ SET time_zone = "+00:00";
 --
 -- Database: `military`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `count_departments`
+-- (See below for the actual view)
+--
+CREATE TABLE `count_departments` (
+`no_of_departments` bigint(21)
+);
 
 -- --------------------------------------------------------
 
@@ -49,11 +59,10 @@ CREATE TABLE `department` (
 --
 
 INSERT INTO `department` (`department_id`, `department_name`, `department_location`, `soldier_id`) VALUES
-('D001', 'Marketing', 'New York', 'S1002'),
+('', '', '', ''),
+('12345', 'test', 'bng', 'S1004'),
 ('D002', 'Finance', 'Chicago', 'S1003'),
-('D003', 'Human Resources', 'San Francisco', 'S1004'),
-('D004', 'Research and Develop', 'Boston', 'S1005'),
-('D005', 'Customer Support', 'Seattle', 'S1001');
+('D003', 'Human Resources', 'San Francisco', 'S1004');
 
 -- --------------------------------------------------------
 
@@ -72,11 +81,10 @@ CREATE TABLE `medals` (
 --
 
 INSERT INTO `medals` (`medal_id`, `medal_name`, `soldier_id`) VALUES
-('M001', 'Bronze Star', 'S1001'),
+('', '', ''),
 ('M002', 'Silver Star', 'S1002'),
 ('M003', 'Gold Medal', 'S1003'),
-('M004', 'Purple Heart', 'S1004'),
-('M005', 'Distinguished Service Cross', 'S1005');
+('M004', 'Purple Heart', 'S1004');
 
 -- --------------------------------------------------------
 
@@ -99,11 +107,21 @@ CREATE TABLE `operation` (
 --
 
 INSERT INTO `operation` (`operation_id`, `operation_name`, `outcome`, `start_date`, `end_date`, `department_id`, `soldier_id`) VALUES
-('O001', 'Operation Alpha', 'Success', '2022-01-10', '2022-01-15', 'D001', 'S1001'),
-('O002', 'Operation Bravo', 'Failure', '2022-02-05', '2022-02-10', 'D002', 'S1002'),
-('O003', 'Operation Charlie', 'Success', '2022-03-20', '2022-03-25', 'D003', 'S1003'),
-('O004', 'Operation Delta', 'Success', '2022-04-15', '2022-04-20', 'D004', 'S1004'),
-('O005', 'Operation Echo', 'Failure', '2022-05-01', '2022-05-05', 'D005', 'S1005');
+('901', 'sd', 'failed', '2024-02-28', '2024-03-06', 'D002', 'S1003'),
+('O002', 'Operation Bravo', 'failed', '2022-02-05', '2022-02-10', 'D002', 'S1002');
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `operation_summary`
+-- (See below for the actual view)
+--
+CREATE TABLE `operation_summary` (
+`total_operations` bigint(21)
+,`successful_operations` decimal(22,0)
+,`failed_operations` decimal(22,0)
+,`in_progress_operations` decimal(22,0)
+);
 
 -- --------------------------------------------------------
 
@@ -124,11 +142,10 @@ CREATE TABLE `posting` (
 --
 
 INSERT INTO `posting` (`post_id`, `start_date`, `end_date`, `soldier_id`, `location`) VALUES
-('P001', '2022-01-10', '2022-03-15', 'S1001', 'Base A'),
+('', '0000-00-00', '0000-00-00', '', ''),
 ('P002', '2022-02-05', '2022-04-20', 'S1002', 'Base B'),
-('P003', '2022-03-20', '2022-05-25', 'S1003', 'Base C'),
 ('P004', '2022-04-15', '2022-06-30', 'S1004', 'Base D'),
-('P005', '2022-05-01', '2022-07-15', 'S1005', 'Base E');
+('wee', '0000-00-00', '0000-00-00', '', '');
 
 -- --------------------------------------------------------
 
@@ -150,11 +167,18 @@ CREATE TABLE `soldier` (
 --
 
 INSERT INTO `soldier` (`soldier_id`, `name`, `dob`, `gender`, `address`, `salary`) VALUES
-('S1001', 'John Doe', '1990-05-15', 'Male', '123 Main Street, Cit', 50000),
+('', '', '0000-00-00', '', '', 0),
+('67456475', 'ad', '2024-03-07', 'sfddsadfa', 'sdfa', 0),
+('6745647523', 'tyr', '2024-03-06', 'ma', 'fggs', 0),
+('67456475232', 'tyr', '2024-03-06', 'ma', 'fggs', 0),
+('674564752321', 'tyr', '2024-03-06', 'ma', 'fggs', 0),
+('87978', 'adghfgh', '2024-03-07', 'sfddsadfa', 'sdfa', 0),
+('8797889', 'adghfgh', '2024-03-07', 'sfddsadfa', 'sdfa', 0),
+('879788923', 'adghfgh', '2024-03-07', 'sfddsadfa', 'sdfa', 0),
+('amit2', 'ad', '2024-03-07', 'sfddsadfa', 'sdfa', 0),
 ('S1002', 'Jane Smith', '1988-08-20', 'Female', '456 Oak Avenue, Town', 55000),
 ('S1003', 'Bob Johnson', '1995-03-10', 'Male', '789 Pine Street, Vil', 48000),
-('S1004', 'Alice Brown', '1992-11-25', 'Female', '101 Cedar Road, Haml', 52000),
-('S1005', 'Charlie Wilson', '1985-07-05', 'Male', '202 Maple Lane, Coun', 60000);
+('S1004', 'Alice Brown', '1992-11-25', 'Female', '101 Cedar Road, Haml', 52000);
 
 -- --------------------------------------------------------
 
@@ -176,11 +200,29 @@ CREATE TABLE `soldier_details` (
 -- --------------------------------------------------------
 
 --
+-- Structure for view `count_departments`
+--
+DROP TABLE IF EXISTS `count_departments`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `count_departments`  AS SELECT count(`department`.`department_id`) AS `no_of_departments` FROM `department` ;
+
+-- --------------------------------------------------------
+
+--
 -- Structure for view `count_soldier`
 --
 DROP TABLE IF EXISTS `count_soldier`;
 
 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `count_soldier`  AS SELECT count(0) AS `no_of_soldier` FROM `soldier` ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `operation_summary`
+--
+DROP TABLE IF EXISTS `operation_summary`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `operation_summary`  AS SELECT count(`operation`.`operation_id`) AS `total_operations`, sum(case when `operation`.`outcome` = 'successful' then 1 else 0 end) AS `successful_operations`, sum(case when `operation`.`outcome` = 'failed' then 1 else 0 end) AS `failed_operations`, sum(case when `operation`.`outcome` = 'in progress' then 1 else 0 end) AS `in_progress_operations` FROM `operation` ;
 
 -- --------------------------------------------------------
 
