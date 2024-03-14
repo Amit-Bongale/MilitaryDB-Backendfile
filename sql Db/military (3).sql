@@ -51,7 +51,7 @@ CREATE TABLE `department` (
   `department_id` varchar(20) NOT NULL,
   `department_name` varchar(20) DEFAULT NULL,
   `department_location` varchar(20) DEFAULT NULL,
-  `soldier_id` varchar(20) NOT NULL
+  `commander_id` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -159,7 +159,8 @@ CREATE TABLE `soldier` (
   `dob` date DEFAULT NULL,
   `gender` char(10) DEFAULT NULL,
   `address` varchar(20) DEFAULT NULL,
-  `salary` float DEFAULT NULL
+  `salary` float DEFAULT NULL,
+  `department_id` varchar(20) 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
