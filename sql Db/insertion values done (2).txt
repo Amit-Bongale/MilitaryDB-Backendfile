@@ -1,76 +1,70 @@
 soldier values:
 
-
-insert into `soldier`(`soldier_id`, `name`, `dob`, `gender`, `address`, `salary`) values ('S1001', 'John Doe', '1990-05-15', 'Male', '123 Main Street, Cityville', 50000);
-
-insert into `soldier`(`soldier_id`, `name`, `dob`, `gender`, `address`, `salary`) values ('S1002', 'Jane Smith', '1988-08-20', 'Female', '456 Oak Avenue, Townsville', 55000);
-
-insert into `soldier`(`soldier_id`, `name`, `dob`, `gender`, `address`, `salary`) values ('S1003', 'Bob Johnson', '1995-03-10', 'Male', '789 Pine Street, Villageland', 48000);
-
-insert into `soldier`(`soldier_id`, `name`, `dob`, `gender`, `address`, `salary`) values ('S1004', 'Alice Brown', '1992-11-25', 'Female', '101 Cedar Road, Hamletville', 52000);
-
-insert into `soldier`(`soldier_id`, `name`, `dob`, `gender`, `address`, `salary`) values ('S1005', 'Charlie Wilson', '1985-07-05', 'Male', '202 Maple Lane, Countryside', 60000);
+INSERT INTO soldier (soldier_id, name, dob, gender, address, salary,department_id) VALUES
+('001', 'Rajesh Kumar ', '1985-04-11', 'male', '123, Main Street, Ko', 80000,'101'),
+('002', 'Anjali Sharma', '1990-09-24', 'female', '456, Park Avenue, Mu', 90000,'102'),
+('003', 'Vikram Singh', '1982-12-02', 'male', '789, Lake Road, Bang', 70000,'103'),
+('004', 'Priya Patel', '1993-06-17', 'female', '101, Hill View Apart', 100000,'101'),
+('005', 'Sanjay Verma', '1978-08-29', 'male', '234, Gandhi Nagar, C', 90000,'105'),
+('006', 'Aman Khanna', '1995-02-13', 'male', '567, River Side, Hyd', 60000,'106'),
+('007', 'Meera Rajput ', '1989-11-04', 'female', '890, Lotus Lane, Pun', 120000,'107'),
+('008', 'Aditya Kapoor', '1973-03-26', 'male', '112, Ocean View, Jai', 95000,'108'),
+('009', 'Nisha Sharma      ', '1980-07-09', 'female', '345, Sunshine Street', 75000,'109'),
+('010', 'Karan Malhotra ', '1987-01-18', 'male', '678, Green Valley, K', 110000,'102')
 
 
 
 department values:
 
-insert into `department`(`department_id`, `department_name`, `department_location`, `soldier_id`) values ('D001', 'Marketing', 'New York', 'S1002');
-
-
-insert into `department`(`department_id`, `department_name`, `department_location`, `soldier_id`) values ('D002', 'Finance', 'Chicago', 'S1003');
-
-insert into `department`(`department_id`, `department_name`, `department_location`, `soldier_id`) values ('D003', 'Human Resources', 'San Francisco', 'S1004');
-
-insert into `department`(`department_id`, `department_name`, `department_location`, `soldier_id`) values ('D004', 'Research and Development', 'Boston', 'S1005');
-
-insert into `department`(`department_id`, `department_name`, `department_location`, `soldier_id`) values ('D005', 'Customer Support', 'Seattle', 'S1001');
-
+INSERT INTO department (department_id, department_name, department_location, commander_id) VALUES
+('101', 'Infantry', 'Delhi', '001'),
+('102', 'Logistics', 'Mumbai', '002'),
+('103', 'Communications', 'Bangalore	', '003'),
+('104', 'Medical', 'Chennai', '004'),
+('105', 'Intelligence', 'Delhi', '005'),
+('106', 'Engineering', 'Hyderabad', '006'),
+('107', 'Reconnaissance', '	Kolkata', '007'),
+('108', 'Cybersecurity', 'Pune', '008'),
+('109', 'Artillery', 'Jaipur', '009'),
+('110', 'Special Forces', 'Chandigarh', '010');
 
 
 medal values;
 
-insert into `medals`(`medal_id`, `medal_name`, `soldier_id`) values ('M001', 'Bronze Star', 'S1001');
-
-insert into `medals`(`medal_id`, `medal_name`, `soldier_id`) values ('M002', 'Silver Star', 'S1002');
-
-insert into `medals`(`medal_id`, `medal_name`, `soldier_id`) values ('M003', 'Gold Medal', 'S1003');
-
-insert into `medals`(`medal_id`, `medal_name`, `soldier_id`) values ('M004', 'Purple Heart', 'S1004');
-
-insert into `medals`(`medal_id`, `medal_name`, `soldier_id`) values ('M005', 'Distinguished Service Cross', 'S1005');
-
+INSERT INTO medals (medal_id, medal_name, soldier_id) VALUES
+('M01', 'Param Vir Chakra', '001'),
+('M02', 'Ashoka Chakra', '002'),
+('M03', 'Maha Vir Chakra', '001'),
+('M04', 'Vir Chakra', '004'),
+('M05', 'Sena Medal', '005'),
+('M06', 'Vishisht Seva Medal', '006'),
+('M07', 'Shaurya Chakra', '007'),
+('M08', 'Kirti Chakra', '008'),
+('M09', 'Yudh Seva Medal', '009'),
+('M10', 'Sarvottam Jeevan Raksha Padak', '010');
 
 
 posting values:
 
-insert into `posting`(`post_id`, `start_date`, `end_date`, `soldier_id`, `location`) values ('P001', '2022-01-10', '2022-03-15', 'S1001', 'Base A');
 
-insert into `posting`(`post_id`, `start_date`, `end_date`, `soldier_id`, `location`) values ('P002', '2022-02-05', '2022-04-20', 'S1002', 'Base B');
-
-insert into `posting`(`post_id`, `start_date`, `end_date`, `soldier_id`, `location`) values ('P003', '2022-03-20', '2022-05-25', 'S1003', 'Base C');
-
-
-insert into `posting`(`post_id`, `start_date`, `end_date`, `soldier_id`, `location`) values ('P004', '2022-04-15', '2022-06-30', 'S1004', 'Base D');
-
-
-insert into `posting`(`post_id`, `start_date`, `end_date`, `soldier_id`, `location`) values ('P005', '2022-05-01', '2022-07-15', 'S1005', 'Base E');
-
-
+INSERT INTO posting (post_id, start_date, end_date, soldier_id, location) VALUES
+('1000', '2024-01-15', '2024-07-15', '001', 'New Delhi'),
+('1001', '2024-03-01', '2024-09-01', '002', 'Mumbai'),
+('1002', '2024-02-10', '2024-08-10', '003', 'Bangalore'),
+('1003', '2024-04-05', '2024-10-05', '004', 'Kolkata'),
+('1004', '2024-05-20', '2024-11-20', '005', 'Chennai'),
+('1005', '2024-06-09', '2025-09-12', '006', 'Hyderabad'),
+('1006', '2024-07-02', '2025-01-02', '007', 'Pune'),
+('1007', '2024-08-15', '2025-02-15', '008', 'Jaipur'),
+('1008', '2024-09-28', '2025-03-28', '009', 'Ahmedabad'),
+('1009', '2024-10-30', '2025-04-30', '010', 'Chandigarh');
 
 operation values:
 
 
-insert into `operation`(`operation_id`, `operation_name`, `outcome`, `start_date`, `end_date`, `department_id`, `soldier_id`) values ('O001', 'Operation Alpha', 'Success', '2022-01-10', '2022-01-15', 'D001', 'S1001');
-
-
-insert into `operation`(`operation_id`, `operation_name`, `outcome`, `start_date`, `end_date`,`department_id`, `soldier_id`) values ('O002', 'Operation Bravo', 'Failure', '2022-02-05', '2022-02-10', 'D002','S1002');
-
-
-insert into `operation`(`operation_id`, `operation_name`, `outcome`, `start_date`, `end_date`,`department_id`, `soldier_id`) values ('O003', 'Operation Charlie', 'Success', '2022-03-20', '2022-03-25', 'D003','S1003');
-
-
-insert into `operation`(`operation_id`, `operation_name`, `outcome`, `start_date`, `end_date`,`department_id`, `soldier_id`) values ('O004', 'Operation Delta', 'Success', '2022-04-15', '2022-04-20', 'D004','S1004');
-
-
-insert into `operation`(`operation_id`, `operation_name`, `outcome`, `start_date`, `end_date`,`department_id`, `soldier_id`) values ('O005', 'Operation Echo', 'Failure', '2022-05-01', '2022-05-05', 'D005','S1005');
+INSERT INTO operation (operation_id, operation_name, outcome, start_date, end_date, department_id, soldier_id) VALUES
+('OP_001', 'Operation Vijay', 'successful', '2022-05-25', '2022-06-25', '101', '001'),
+('OP_002', ' Operation Meghdoot', 'in progress', '2023-04-13', '2023-04-20', '101', '004'),
+('OP_003 ', 'Operation Rakshak', 'in progress', '2023-11-01', '2023-11-10', '107', '007'),
+('OP_004', 'Operation Rhino', 'successful', '2022-01-01', '2022-09-29', '109', '009'),
+('OP_005 ', 'Operation Cactus', 'failed', '2023-11-03', '2023-11-14', '103', '003');
