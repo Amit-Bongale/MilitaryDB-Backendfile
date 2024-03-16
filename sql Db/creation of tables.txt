@@ -7,7 +7,7 @@ name varchar(20),
 dob date,
 gender char(10),
 address varchar(20),
-salary float
+salary float 
 );
 
 create table department 
@@ -15,10 +15,13 @@ create table department
 department_id varchar(20),
 department_name varchar(20),
 department_location varchar(20),
-soldier_id varchar(20),
-primary key(department_id,soldier_id),
-foreign key (soldier_id) references soldier(soldier_id) on delete cascade
+commander_id varchar(20),
+primary key(department_id),
+foreign key (commander_id) references soldier(soldier_id) on delete set null
 );
+
+ALTER TABLE soldier
+ADD department_id varchar(20) REFERENCES department(department_id) on delete set null;
 
 create table medals
 (
@@ -43,7 +46,7 @@ create table operation
 (
 operation_id varchar(20),
 operation_name varchar(20),
-outcome varchar(10),
+outcome varchar(20),
 start_date date,
 end_date date,
 department_id varchar(20),
@@ -66,21 +69,21 @@ SELECT
     s.name AS soldier_name,
     d.department_id,
     d.department_name,
+    d.commander_id,
     o.operation_name,
     o.outcome,
     p.post_id,
     m.medal_name
 FROM
     soldier s
-JOIN
-    department d ON s.soldier_id = d.soldier_id
-JOIN
-    operation o ON s.soldier_id = o.soldier_id
-JOIN
-    posting p ON s.soldier_id = p.soldier_id
-JOIN
-    medals m ON s.soldier_id = m.soldier_id;
-
+LEFT JOIN
+    department d ON d.department_id = s.department_id
+LEFT JOIN
+    operation o ON o.soldier_id = s.soldier_id
+LEFT JOIN
+    posting p ON p.soldier_id = s.soldier_id
+LEFT JOIN
+    medals m ON m.soldier_id = s.soldier_id;
 
 
 --count soldier:
@@ -94,7 +97,7 @@ CREATE VIEW count_departments AS SELECT COUNT(department_id) AS no_of_department
 
 --operation_summary:
 
-REATE VIEW operation_summary AS
+CREATE VIEW operation_summary AS
 SELECT
 COUNT(operation_id) AS total_operations,
 SUM(CASE WHEN outcome = 'successful' THEN 1 ELSE 0 END) AS successful_operations,

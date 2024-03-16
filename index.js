@@ -96,7 +96,7 @@ app.post('/viewsoldiers', (req, res) => {
 
 
 app.post('/updatesoldier', (req, res) => {
-  const { soldier_id , name, dob, gender, address, salary } = req.body;
+  const { soldier_id , name, dob, gender, address, salary , department_id } = req.body;
 
   let query =
   `UPDATE soldier SET 
@@ -104,7 +104,8 @@ app.post('/updatesoldier', (req, res) => {
   dob = '${dob}',
   gender = '${gender}',
   address = '${address}',
-  salary = '${salary}'
+  salary = '${salary}',
+  department_id = '${department_id}'
   WHERE soldier_id = '${soldier_id}'`;
 
   db.query(query,  (err, results) => {
@@ -196,13 +197,13 @@ app.post('/departmentdetails', (req, res) => {
 
 
 app.post('/insertdept', (req, res) => {
-  const { department_id, department_name, department_location, soldier_id } = req.body;
+  const { department_id, department_name, department_location, commander_id } = req.body;
 
-  let query = `INSERT INTO department(department_id, department_name, department_location, soldier_id) VALUES (? , ? , ? ,?)`;
+  let query = `INSERT INTO department(department_id, department_name, department_location, commander_id) VALUES (? , ? , ? ,?)`;
 
   console.log(query);
 
-  db.query(query, [department_id, department_name, department_location, soldier_id ], (err, results) => {
+  db.query(query, [department_id, department_name, department_location, commander_id ], (err, results) => {
 
     if (err) {
       console.error('Error inserting data:', err);
@@ -244,13 +245,13 @@ app.post('/viewdepartment', (req, res) => {
 
 
 app.post('/updatedepartment', (req, res) => {
-  const { department_id, department_name, department_location, soldier_id } = req.body;
+  const { department_id, department_name, department_location, commander_id } = req.body;
 
   let query =
   `UPDATE department SET 
   department_Name = '${department_name}',
   department_Location = '${department_location}',
-  soldier_id = '${soldier_id}'
+  commander_id = '${commander_id}'
   WHERE department_id = '${department_id}'`;
 
   db.query(query,  (err, results) => {
