@@ -61,10 +61,10 @@ INSERT INTO posting (post_id, start_date, end_date, soldier_id, location) VALUES
 
 operation values:
 
-
 INSERT INTO operation (operation_id, operation_name, outcome, start_date, end_date, department_id, soldier_id) VALUES
 ('OP_001', 'Operation Vijay', 'successful', '2022-05-25', '2022-06-25', '101', '001'),
 ('OP_002', ' Operation Meghdoot', 'in progress', '2023-04-13', '2023-04-20', '101', '004'),
 ('OP_003 ', 'Operation Rakshak', 'in progress', '2023-11-01', '2023-11-10', '107', '007'),
 ('OP_004', 'Operation Rhino', 'successful', '2022-01-01', '2022-09-29', '109', '009'),
-('OP_005 ', 'Operation Cactus', 'failed', '2023-11-03', '2023-11-14', '103', '003');
+('OP_005 ', 'Operation Cactus', 'failed', '2023-11-03', '2023-11-14', '103', '003'),
+('OP_006' , 'Operation Black Panther' , 'successful' , '2024-01-23' , '2024-02-02' , '010' , '103');

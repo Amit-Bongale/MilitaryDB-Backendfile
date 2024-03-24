@@ -51,11 +51,11 @@ app.post('/soldierdetails', (req, res) => {
 
 
 app.post('/insertsoldier', (req, res) => {
-  const { soldier_id, name, dob, gender, address, salary } = req.body;
+  const { soldier_id, name, dob, gender, address, salary , department_id} = req.body;
 
-  let query = `INSERT INTO soldier(soldier_id, name, dob, gender, address, salary) VALUES (? , ? , ? , ? , ? ,?)`;
+  let query = `INSERT INTO soldier(soldier_id, name, dob, gender, address, salary , department_id) VALUES (? , ? , ? , ? , ? ,? , ?)`;
 
-  db.query(query, [soldier_id, name, dob, gender, address, salary ], (err, results) => {
+  db.query(query, [soldier_id, name, dob, gender, address, salary , department_id ], (err, results) => {
 
     if (err) {
       console.error('Error inserting data:', err);
@@ -212,8 +212,7 @@ app.post('/insertdept', (req, res) => {
     }
     
     console.log(results);
-
-    res.status(200).json({ message: 'Department inserted successfully'});
+    res.status(200).json({ message: 'Department inserted successfully '});
     
   });
 });
